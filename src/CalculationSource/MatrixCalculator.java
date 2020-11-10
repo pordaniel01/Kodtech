@@ -22,7 +22,14 @@ public class MatrixCalculator {
 
     }
     //osszeadja a mtx osszes elemet (vektorsuly szamolásnál fulljó)
-    public int calculateWight(int i ){
-
+    public double calculateWight(int i ){
+        Matrix mtx = matrices.get(i);
+        double sum = 0;
+        for(int k = 0 ; k < mtx.getColumns(); k++){
+            for(int j = 0; j < mtx.getRows(); j++){
+                sum += mtx.getElement(j,k);
+            }
+        }
+        return sum;
     }
 }
