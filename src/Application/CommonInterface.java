@@ -77,7 +77,7 @@ public class CommonInterface {
         System.out.println("get part of this matrix");
         mtxmltM.printMtx();
         System.out.println(" ");
-        mtxmltM.getPartMtx(1,3,1,2).printMtx();
+        mtxmltM.getPartMtx(1,3,2,3).printMtx();
 
 
 
@@ -95,5 +95,16 @@ public class CommonInterface {
         hc.getParChkMtx().printMtx();
         hc.getParams();
         hc.calculateGenMtx();
+        hc.getGenMtx().printMtx();
+
+        System.out.println("calc parchek from genmtx");
+        int g1[] = {1,0,1,1,0,0};
+        int g2[] = {0,1,1,1,1,1};
+        int gen[][] = {g1,g2};
+        Matrix genMtx = new Matrix(gen,6,2);
+        HammingChannel hc2 = new HammingChannel();
+        hc2.setGenMtx(genMtx);
+        hc2.calculateParChkMtx();
+        hc2.getParChkMtx().printMtx();
     }
 }

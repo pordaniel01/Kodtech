@@ -28,6 +28,9 @@ public class HammingChannel {
     public Matrix getParChkMtx(){
         return parChkMtx;
     }
+    public Matrix getGenMtx(){
+        return genMtx;
+    }
     public void calculateGenMtx(){
         if(parChkMtx != null){
             System.out.println("calculating genmtx");
@@ -44,7 +47,6 @@ public class HammingChannel {
                         genMtx.mtx[i][j] = 0;
                 }
             }
-            genMtx.printMtx();
             for(int i = k; i < n; i++){     //oszlop
                 for(int j = 0; j < k; j++){ //sor
                     genMtx.mtx[j][i] = Atrans.mtx[j][i-k];
@@ -53,5 +55,27 @@ public class HammingChannel {
 
         }
     }
-    //public static void calculateParChkMtx
+    public void calculateParChkMtx(){
+        parChkMtx = new Matrix(n-k,n);
+        MatrixCalculator mc = new MatrixCalculator(parChkMtx);
+        mc.add(genMtx);
+        //System.out.println(k);
+        Matrix A = genMtx.getPartMtx(1,k,k+1,n);
+        mc.add(A);
+        Matrix Atrans = mc.transpose(2);
+        for(int i = 0; i < k; i++){ //oszlop
+            for(int j = 0; j < n-k; j++){  //sor
+                parChkMtx.mtx[j][i] = Atrans.mtx[j][i];
+            }
+        }
+        //parChkMtx.printMtx();
+        for(int i = k; i < n ; i++) {//osszlop
+            for (int j = 0; j < n - k; j++) { //sor
+                if( j == (i-k))
+                    parChkMtx.mtx[j][i] = 1;
+                else
+                    parChkMtx.mtx[j][i] = 0;
+            }
+        }
+    }
 }
