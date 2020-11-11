@@ -5,21 +5,48 @@ import java.util.ArrayList;
 public class MatrixCalculator {
     ArrayList<Matrix> matrices;
     public MatrixCalculator(Matrix[] matrices){
+        matrices = new ArrayList<Matrix>();
         for(int i = 0; i < matrices.length;i++){
-            this.matrices.add(matrices[i]);
+            this.matrices.add(Matrix[i]);
         }
     }
+    public  MatrixCalculator(Matrix mtx){
+        matrices.add(mtx);
+    }
+    public void add(Matrix mtx){
+        matrices.add(mtx);
+    }
     //osszeadja a két mátrixot
-    public void add(int i, int j){
-
+    public Matrix sum(int i, int j) throws Exception {
+        matrices.get(0).printMtx();
+        Matrix mtx1 = matrices.get(i);
+        Matrix mtx2 = matrices.get(j);
+        if(mtx1.getRows() != mtx2.getRows() || mtx1.getColumns() != mtx2.getColumns()) {
+            Exception exception = new Exception("Not equal size matrices, cant add them");
+            throw exception;
+        }
+        Matrix output = new Matrix(mtx1.getRows(),mtx2.getColumns());
+        for(int k = 0; i < mtx1.getColumns(); i++){
+            for(int l = 0; l < mtx2.getRows(); l++){
+                output.mtx[l][i] = mtx1.mtx[l][i] + mtx2.mtx[l][i];
+            }
+        }
+        return  output;
     }
     //osszeszoroz két mátrixot, balrol az i jobbrol a j ik elem
     public void mtxMultiply(int i, int j){
 
     }
     //transzponálja a paraméterként megadott mátrixot
-    public void transpose(int i){
-
+    public Matrix transpose(int i){
+        Matrix mtx = matrices.get(i);
+        Matrix newMtx = new Matrix(mtx.getColumns(),mtx.getRows());
+        for(int k = 0; i < mtx.getRows(); i++){
+            for(int j = 0; j < mtx.getColumns(); j++){
+                newMtx.mtx[k][i] = mtx.mtx[i][k];
+            }
+        }
+        return newMtx;
     }
     //osszeadja a mtx osszes elemet (vektorsuly szamolásnál fulljó)
     public double calculateWight(int i ){
