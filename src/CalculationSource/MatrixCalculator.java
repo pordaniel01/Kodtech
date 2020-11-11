@@ -38,13 +38,15 @@ public class MatrixCalculator {
     //transzponálja a paraméterként megadott mátrixot
     public Matrix transpose(int i){
         Matrix mtx = matrices.get(i);
+
         Matrix newMtx = new Matrix(mtx.getColumns(),mtx.getRows());
-        for(int k = 0; i < mtx.getRows(); i++){
-            for(int j = 0; j < mtx.getColumns(); j++){
-                newMtx.mtx[k][i] = mtx.mtx[i][k];
+        for(int k = 0; k < newMtx.getRows(); k++){
+            for(int j = 0; j < newMtx.getColumns(); j++){
+                newMtx.mtx[k][j] = mtx.mtx[j][k];
             }
         }
         return newMtx;
+
     }
     //osszeadja a mtx osszes elemet (vektorsuly szamolásnál fulljó)
     public double calculateWight(int i ){
