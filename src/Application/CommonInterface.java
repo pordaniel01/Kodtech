@@ -1,19 +1,20 @@
 package Application;
 
+import CalculationSource.HammingChannel;
 import CalculationSource.Matrix;
 import CalculationSource.MatrixCalculator;
 
 public class CommonInterface {
     public static void main(String args[]){
-        double row1[] = {3,3,5};
-        double row2[] = {1,5,2};
-        double row3[] = {2,3,5};
-        double mtx1[][] = {row1, row2,row3};
+        int row1[] = {3,3,5};
+        int row2[] = {1,5,2};
+        int row3[] = {2,3,5};
+        int mtx1[][] = {row1, row2,row3};
 
-        double row4[] = {1,1,1};
-        double row5[] = {2,2,2};
-        double row6[] = {3,3,3};
-        double mtx3[][] = {row4,row5,row6};
+        int row4[] = {1,1,1};
+        int row5[] = {2,2,2};
+        int row6[] = {3,3,3};
+        int mtx3[][] = {row4,row5,row6};
 
         Matrix mtx2 = new Matrix(mtx1,3,3);
         Matrix mtx4 = new Matrix(mtx3,3,3);
@@ -39,7 +40,7 @@ public class CommonInterface {
         Matrix mtx6 = calculator.transpose(0);
         System.out.println("");
         mtx6.printMtx();
-        double mtx8[][] =  {{3,3,3,3},{4,4,4,4},{6,6,6,6}};
+        int mtx8[][] =  {{3,3,3,3},{4,4,4,4},{6,6,6,6}};
         Matrix mtx7 = new Matrix(mtx8,4,3);
         System.out.println("new mtx");
         mtx7.printMtx();
@@ -52,10 +53,15 @@ public class CommonInterface {
 
 
         System.out.println("multiply these two:");
-        double[][] mtxmltply1 ={{1,2,3},{4,5,6},{7,8,9}};
+        int[][] mtxmltply1 ={{1,2,3},
+                             {4,5,6},
+                             {7,8,9}};
         Matrix mtxmltM= new Matrix(mtxmltply1,3,3);
-        double[][] mtxmltply2 ={{1,4},{2,5},{3,6}};
+        int[][] mtxmltply2 ={{1,4},{2,5},{3,6}};
         Matrix mtxmltM2 = new Matrix(mtxmltply2,2,3);
+        System.out.println("changing 1 number");
+        mtxmltM2.setElement(1,2,69);
+        mtxmltM2.printMtx();
         MatrixCalculator mlt = new MatrixCalculator(mtxmltM);
         System.out.println("multiply this:");
         mtxmltM.printMtx();
@@ -68,5 +74,26 @@ public class CommonInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("get part of this matrix");
+        mtxmltM.printMtx();
+        System.out.println(" ");
+        mtxmltM.getPartMtx(1,3,1,2).printMtx();
+
+
+
+        //HAMMING
+        System.out.println("calc gen from this parchk:");
+        int h1[] = {1,1,1,0,0,0};
+        int h2[] = {1,1,0,1,0,0};
+        int h3[] = {0,1,0,0,1,0};
+        int h4[] = {0,1,0,0,0,1};
+        int parMtx[][] = {h1,h2,h3,h4};
+        Matrix ParMtx = new Matrix(parMtx,6,4);
+        //ParMtx.printMtx();
+        HammingChannel hc = new HammingChannel();
+        hc.setParChkMtx(ParMtx);
+        hc.getParChkMtx().printMtx();
+        hc.getParams();
+        hc.calculateGenMtx();
     }
 }

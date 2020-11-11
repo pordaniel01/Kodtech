@@ -31,8 +31,8 @@ public class MatrixCalculator {
         }
         return  output;
     }
-    private double multiplyMatricesCell(Matrix mtx1, Matrix mtx2, int row, int col){
-        double cell = 0;
+    private int multiplyMatricesCell(Matrix mtx1, Matrix mtx2, int row, int col){
+        int cell = 0;
         for(int i = 0; i < mtx2.getRows();i++){
             cell += mtx1.mtx[row][i] * mtx2.mtx[i][col];
         }
