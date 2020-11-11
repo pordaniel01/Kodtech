@@ -13,17 +13,19 @@ public class CommonInterface {
         double row4[] = {1,1,1};
         double row5[] = {2,2,2};
         double row6[] = {3,3,3};
-        double mtx3[][] = {row1,row2,row3};
+        double mtx3[][] = {row4,row5,row6};
 
         Matrix mtx2 = new Matrix(mtx1,3,3);
         Matrix mtx4 = new Matrix(mtx3,3,3);
-        System.out.println(mtx2.mtx[0][0] );
         mtx2.printMtx();
         System.out.println("");
         mtx4.printMtx();
+        System.out.println("");
 
         MatrixCalculator calculator = new MatrixCalculator(mtx2);
         calculator.add(mtx4);
+        System.out.println("");
+
         try {
             Matrix mtx5 = calculator.sum(0,1);
             mtx5.printMtx();

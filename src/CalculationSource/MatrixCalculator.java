@@ -3,11 +3,10 @@ package CalculationSource;
 import java.util.ArrayList;
 
 public class MatrixCalculator {
-    ArrayList<Matrix> matrices;
-    public MatrixCalculator(Matrix[] matrices){
-        matrices = new ArrayList<Matrix>();
-        for(int i = 0; i < matrices.length;i++){
-            this.matrices.add(Matrix[i]);
+    ArrayList<Matrix> matrices = new ArrayList<Matrix>();
+    public MatrixCalculator(Matrix[] matrixArr){
+        for(int i = 0; i < matrixArr.length;i++){
+            this.matrices.add(matrixArr[i]);
         }
     }
     public  MatrixCalculator(Matrix mtx){
@@ -18,7 +17,6 @@ public class MatrixCalculator {
     }
     //osszeadja a két mátrixot
     public Matrix sum(int i, int j) throws Exception {
-        matrices.get(0).printMtx();
         Matrix mtx1 = matrices.get(i);
         Matrix mtx2 = matrices.get(j);
         if(mtx1.getRows() != mtx2.getRows() || mtx1.getColumns() != mtx2.getColumns()) {
