@@ -50,5 +50,23 @@ public class CommonInterface {
         //System.out.println(mtx.mtx[0][2]);
         //System.out.println("szia");
 
+
+        System.out.println("multiply these two:");
+        double[][] mtxmltply1 ={{1,2,3},{4,5,6},{7,8,9}};
+        Matrix mtxmltM= new Matrix(mtxmltply1,3,3);
+        double[][] mtxmltply2 ={{1,4},{2,5},{3,6}};
+        Matrix mtxmltM2 = new Matrix(mtxmltply2,2,3);
+        MatrixCalculator mlt = new MatrixCalculator(mtxmltM);
+        System.out.println("multiply this:");
+        mtxmltM.printMtx();
+        System.out.println("with this:");
+        mtxmltM2.printMtx();
+        mlt.add(mtxmltM2);
+        try {
+            System.out.println("result:");
+            mlt.mtxMultiply(0,1).printMtx();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,5 +1,7 @@
 package CalculationSource;
 
-public class GeneratorMatrix extends Matrix{
-    
+public class GeneratorMatrix {
+    public GeneratorMatrix(){
+
+    }
 }

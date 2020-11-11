@@ -31,8 +31,28 @@ public class MatrixCalculator {
         }
         return  output;
     }
+    private double multiplyMatricesCell(Matrix mtx1, Matrix mtx2, int row, int col){
+        double cell = 0;
+        for(int i = 0; i < mtx2.getRows();i++){
+            cell += mtx1.mtx[row][i] * mtx2.mtx[i][col];
+        }
+        return cell;
+    }
     //osszeszoroz két mátrixot, balrol az i jobbrol a j ik elem
-    public void mtxMultiply(int i, int j){
+    public Matrix mtxMultiply(int i, int j) throws Exception {
+        Matrix mtx1 = matrices.get(i);
+        Matrix mtx2 = matrices.get(j);
+        Matrix output = new Matrix(mtx1.getRows(),mtx2.getColumns());
+        if(mtx1.getColumns() != mtx2.getRows()){
+            Exception e = new Exception("row count doesnt match");
+            throw e;
+        }
+        for(int k = 0; k < output.getRows();k++){
+            for(int l= 0 ; l < output.getColumns();l++){
+                output.mtx[k][l] = multiplyMatricesCell(mtx1,mtx2,k,l);
+            }
+        }
+        return output;
 
     }
     //transzponálja a paraméterként megadott mátrixot
