@@ -46,6 +46,7 @@ public class CommonInterface {
         MatrixCalculator mc = new MatrixCalculator(mtx7);
         System.out.println("transposing it");
         mc.transpose(0).printMtx();
+        System.out.println("weight: " + mc.calculateWight(0));
         //System.out.println(mtx.mtx[0][2]);
         //System.out.println("szia");
 

@@ -54,7 +54,7 @@ public class MatrixCalculator {
         double sum = 0;
         for(int k = 0 ; k < mtx.getColumns(); k++){
             for(int j = 0; j < mtx.getRows(); j++){
-                sum += mtx.getElement(j,k);
+                sum += mtx.mtx[j][k];
             }
         }
         return sum;
