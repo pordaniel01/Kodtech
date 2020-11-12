@@ -115,5 +115,20 @@ public class CommonInterface {
         ArrayList<Matrix> errors = hc2.getErrorGroup(new Matrix(sindromeVector,4,1));
         for(int i = 0; i < errors.size();i++)
             errors.get(i).printMtx();
+
+
+        System.out.println("second example");
+        int G[][] = {{1,0,1,1,0,0},{0,1,1,1,1,1}};
+        HammingChannel HC2 = new HammingChannel();
+        Matrix GENMTX = new Matrix(G,6,2);
+        HC2.setGenMtx(GENMTX);
+        HC2.calculateParChkMtx();
+        HC2.getParChkMtx().printMtx();
+        int sindromeConst[][] = {{0,0,0,1}};
+        Matrix sindrome = new Matrix(sindromeConst,4,1);
+        ArrayList<Matrix> errors2 = HC2.getErrorGroup(sindrome);
+        System.out.println();
+        for(int i = 0; i < errors2.size();i++)
+            errors2.get(i).printMtx();
     }
 }

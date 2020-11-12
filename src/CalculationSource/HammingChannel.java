@@ -113,15 +113,12 @@ public class HammingChannel {
                 if (gottenSindromeVectorTransposed.compareMatrix(sindromeVector)) {
                     goodErrorVectors.add(errTrans);
                 }
-                mc.remove(3);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             mc.matrices.clear();
 
-            for(int j = 0; j < goodErrorVectors.size();j++) {
 
-            }
         }
         return goodErrorVectors;
 
