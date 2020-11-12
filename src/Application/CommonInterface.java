@@ -4,6 +4,8 @@ import CalculationSource.HammingChannel;
 import CalculationSource.Matrix;
 import CalculationSource.MatrixCalculator;
 
+import java.util.ArrayList;
+
 public class CommonInterface {
     public static void main(String args[]){
         int row1[] = {3,3,5};
@@ -40,8 +42,8 @@ public class CommonInterface {
         Matrix mtx6 = calculator.transpose(0);
         System.out.println("");
         mtx6.printMtx();
-        int mtx8[][] =  {{3,3,3,3},{4,4,4,4},{6,6,6,6}};
-        Matrix mtx7 = new Matrix(mtx8,4,3);
+        int mtx8[][] =  {{3,3,3,3}};
+        Matrix mtx7 = new Matrix(mtx8,4,1);
         System.out.println("new mtx");
         mtx7.printMtx();
         MatrixCalculator mc = new MatrixCalculator(mtx7);
@@ -96,7 +98,8 @@ public class CommonInterface {
         hc.getParams();
         hc.calculateGenMtx();
         hc.getGenMtx().printMtx();
-
+        System.out.println("is this the same as himself?");
+        System.out.println(ParMtx.compareMatrix(ParMtx));
         System.out.println("calc parchek from genmtx");
         int g1[] = {1,0,1,1,0,0};
         int g2[] = {0,1,1,1,1,1};
@@ -106,5 +109,11 @@ public class CommonInterface {
         hc2.setGenMtx(genMtx);
         hc2.calculateParChkMtx();
         hc2.getParChkMtx().printMtx();
+        int s1[] = {0,0,0,1};
+        int sindromeVector[][] = {s1};
+        System.out.println("errorvecs");
+        ArrayList<Matrix> errors = hc2.getErrorGroup(new Matrix(sindromeVector,4,1));
+        for(int i = 0; i < errors.size();i++)
+            errors.get(i).printMtx();
     }
 }

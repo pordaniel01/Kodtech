@@ -47,5 +47,15 @@ public class Matrix {
         }
         return  newMtx;
     }
+    public boolean compareMatrix(Matrix toThis){
+        boolean areTheyTheSame = true;
+        for(int i = 0; i < this.getRows();i ++){
+            for(int j = 0; j < this.getColumns(); j++){
+                if(this.mtx[i][j] != toThis.mtx[i][j])
+                    areTheyTheSame = false;
+            }
+        }
+        return areTheyTheSame;
+    }
 
 }

@@ -15,6 +15,12 @@ public class MatrixCalculator {
     public void add(Matrix mtx){
         matrices.add(mtx);
     }
+    public Matrix get(int i){
+        return matrices.get(i);
+    }
+    public void remove(int i){
+        matrices.remove(i);
+    }
     //osszeadja a két mátrixot
     public Matrix sum(int i, int j) throws Exception {
         Matrix mtx1 = matrices.get(i);
@@ -31,7 +37,7 @@ public class MatrixCalculator {
         }
         return  output;
     }
-    private int multiplyMatricesCell(Matrix mtx1, Matrix mtx2, int row, int col){
+    public int multiplyMatricesCell(Matrix mtx1, Matrix mtx2, int row, int col){
         int cell = 0;
         for(int i = 0; i < mtx2.getRows();i++){
             cell += mtx1.mtx[row][i] * mtx2.mtx[i][col];
@@ -58,7 +64,6 @@ public class MatrixCalculator {
     //transzponálja a paraméterként megadott mátrixot
     public Matrix transpose(int i){
         Matrix mtx = matrices.get(i);
-
         Matrix newMtx = new Matrix(mtx.getColumns(),mtx.getRows());
         for(int k = 0; k < newMtx.getRows(); k++){
             for(int j = 0; j < newMtx.getColumns(); j++){

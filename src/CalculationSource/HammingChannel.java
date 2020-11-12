@@ -1,5 +1,8 @@
 package CalculationSource;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class HammingChannel {
     private int n;
     private int k;
@@ -59,7 +62,6 @@ public class HammingChannel {
         parChkMtx = new Matrix(n-k,n);
         MatrixCalculator mc = new MatrixCalculator(parChkMtx);
         mc.add(genMtx);
-        //System.out.println(k);
         Matrix A = genMtx.getPartMtx(1,k,k+1,n);
         mc.add(A);
         Matrix Atrans = mc.transpose(2);
@@ -68,14 +70,60 @@ public class HammingChannel {
                 parChkMtx.mtx[j][i] = Atrans.mtx[j][i];
             }
         }
-        //parChkMtx.printMtx();
         for(int i = k; i < n ; i++) {//osszlop
             for (int j = 0; j < n - k; j++) { //sor
-                if( j == (i-k))
+                if (j == (i - k))
                     parChkMtx.mtx[j][i] = 1;
                 else
                     parChkMtx.mtx[j][i] = 0;
             }
         }
+    }
+    private int[] binaryConverter(int decimal, int bits){
+        int binary[] = new int[bits+1];
+        int index = bits - 1;
+        while(decimal  > 0){
+            binary[index--] = decimal % 2;
+            decimal = decimal/2;
+        }
+        return binary;
+    }
+    public ArrayList<Matrix> getErrorGroup(Matrix sindromeVector){
+
+        ArrayList<Matrix> possibleErrorVectors = new ArrayList<Matrix>();
+        for(int i = 0; i < Math.pow(2,n); i++){
+            Matrix errorVector = new Matrix(1,n);
+            int binary[] = binaryConverter(i,n);
+            for(int j = 0; j < n; j++){
+                errorVector.mtx[0][j] = binary[j];
+            }
+            MatrixCalculator mc = new MatrixCalculator(errorVector);
+            possibleErrorVectors.add(errorVector);
+        }
+        ArrayList<Matrix> goodErrorVectors = new ArrayList<Matrix>();
+        for(int i = 0; i < possibleErrorVectors.size();i++){
+            MatrixCalculator mc = new MatrixCalculator(parChkMtx);
+            mc.add(possibleErrorVectors.get(i));
+            Matrix errTrans = mc.transpose(1);
+            mc.add(errTrans);
+            try {
+                Matrix gottenSindromeVector = mc.mtxMultiply(0,2);
+                mc.add(gottenSindromeVector);
+                Matrix gottenSindromeVectorTransposed = mc.transpose(3);
+                if (gottenSindromeVectorTransposed.compareMatrix(sindromeVector)) {
+                    goodErrorVectors.add(errTrans);
+                }
+                mc.remove(3);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mc.matrices.clear();
+
+            for(int j = 0; j < goodErrorVectors.size();j++) {
+
+            }
+        }
+        return goodErrorVectors;
+
     }
 }
